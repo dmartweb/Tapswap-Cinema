@@ -1,28 +1,21 @@
-<a href="https://github.com/HamedAp/Tapswap-Cinema/blob/main/README-en.md">English Info</a>
+# How To Run ?
 
-# آموزش راه اندازی
+1. Open Tapswap Bot And Turn Off Internet ( Wifi - Cellular )
 
-1. ربات تپ سواپ را باز کنید و بعد از باز شده کامل ربات اینترنت خود را خاموش کنید .
+2. Click on 3 Dots On Top (Menu) And Click On Reload .
 
-2. سپس در بالای صفحه 3 نقطه ( منو ) را بزنید و گزینه ریلود را انتخاب کنید .
+3. After Reload ,Page Shows Not Loaded Error And Link Under It :) Copy All Text ( Include Web Page Not Available )
 
-3. بعد از زدن دکمه ریلود صفحه برای شما لود نمیشد و خطای پیدا نکردن سایت را میدهد ( اینترنت قطع باشد ) . سپس کل متن را سلکت آل ( select all ) کنید و کپی کنید .
+4. Send Text To Your PC And Open Link In Browser.
 
-4. متن کپی شده را به لپتاپ خود ارسال کنید و لینک داخل متن را در گوگل کروم باز کنید .
-
-5. افزونه زیر را نصب کنید :
+5. Install TamperMonkey :
 
 ````
 https://chromewebstore.google.com/detail/tampermonkey/dhdgffkkebhmkfjojejmpbldmpobfkfo?hl=en
 ````
 
-6. در تنظیمات افزونه گزینه اضافه کردن اسکرپت جدید را بزنید 
+6. Add New Script From Plugin Setting
 
-7. سپس فایلی که در بالا با عنوان tampermonkey.js هستش رو باز کنید و متن داخل آن را کپی کرده و در افزونه بالا پیست کنید . و در اخر ذخیره کنید .
+7. Import tampermonkey.js ( In This Github Files ) Text In Tampermonkey Script And Save
 
-8. صفحه را رفرش کرده و سپس نتیجه کار را ببینید :)
-
-
-جهت حمایت از ما ستاره به گیت هاب یادتون نره :) 
-ممنون از همه 
-
+8. Refresh Tapswap Link And See Result :)
