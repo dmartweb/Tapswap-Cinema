@@ -12,6 +12,7 @@
 // @homepage     https://github.com/HamedAp/Tapswap-Cinema/
 // @require      https://code.jquery.com/jquery-3.7.1.min.js
 // ==/UserScript==
+
 (function () {
   function onready(fn) {
     if (document.readyState != "loading") fn();
@@ -111,7 +112,7 @@ function done() {
             }
               setTimeout(function () {
                   close1.click();
-              },1000);
+              },3000);
           }
           answers = storedText;
 
@@ -125,7 +126,7 @@ function done() {
           if (input) {
             input.focus();
           }
-        }, 1000);
+        }, 3000);
       }
     }
     ///// Close Messages And Go Tasks/////
@@ -138,7 +139,7 @@ function done() {
       if (close1) {close1.click();}
       if (taskkk) {taskkk.click();}
       if (relod) {location.reload();}
-    }, 2000);
+    }, 60000);
 
 
     setInterval(function () {
@@ -211,7 +212,7 @@ function done() {
         claimm.click();
            setTimeout(function () {
                backbutton.click();
-          }, 2000);
+          }, 5000);
       }
     }, 1000);
   });
