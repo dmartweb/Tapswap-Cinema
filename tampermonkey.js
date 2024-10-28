@@ -1,18 +1,17 @@
 // ==UserScript==
 // @name         Tapswap
 // @namespace    http://shahanpanel.link
-// @version      2.7
+// @version      2.8
 // @description  Tapswap Auto Task :)
 // @author       HamedAp & lcarusD
 // @match        https://app.tapswap.club/*
 // @icon         https://www.softportal.com/en/scr/1089/icons/icon_src.png
 // @grant        GM_webRequest
-// @downloadURL  https://raw.githubusercontent.com/HamedAp/Tapswap-Cinema/main/tampermonkey.js
-// @updateURL    https://raw.githubusercontent.com/HamedAp/Tapswap-Cinema/main/tampermonkey.js
-// @homepage     https://github.com/HamedAp/Tapswap-Cinema/
+// @downloadURL  https://raw.githubusercontent.com/LightEssence/Tapswap-Cinema/main/tampermonkey.js
+// @updateURL    https://raw.githubusercontent.com/LightEssence/Tapswap-Cinema/main/tampermonkey.js
+// @homepage     https://github.com/LightEssence/Tapswap-Cinema/
 // @require      https://code.jquery.com/jquery-3.7.1.min.js
 // ==/UserScript==
-
 (function () {
   function onready(fn) {
     if (document.readyState != "loading") fn();
@@ -86,48 +85,49 @@ function done() {
   if (storedText) {
     const bigObj = JSON.parse(storedText, (key, value, context) => {
       if (key == soal) {
-        storedText = value;
+        storedText = value || ""; // Set to "None" if value is empty
       }
       return storedText;
     });
-          const input = document.evaluate(
-            "/html/body/div/div[1]/div[2]/div[3]/div[2]/div/div[3]/div/div/input",
-            document,
-            null,
-            XPathResult.FIRST_ORDERED_NODE_TYPE,
-            null
-          ).singleNodeValue;
-     if(storedText.includes("{")){
-          storedText = "";
-      }
-          if (input) {
-            input.value = storedText;
-            const inputEvent = new Event("input", { bubbles: true });
-            input.dispatchEvent(inputEvent);
-            const close1 = Array.from(document.querySelectorAll("button")).find(
-              (el) => el.textContent.includes("Submit")
-            );
-            if (close1) {
-              close1.click();
-            }
-              setTimeout(function () {
-                  close1.click();
-              },3000);
-          }
-          answers = storedText;
 
+    const input = document.evaluate(
+      "/html/body/div/div[1]/div[2]/div[3]/div[2]/div/div[3]/div/div/input",
+      document,
+      null,
+      XPathResult.FIRST_ORDERED_NODE_TYPE,
+      null
+    ).singleNodeValue;
 
-        } else {
-          answers = "NotFound";
-        }
-        console.log("Shahan Answer : ---" + answers + "---");
-        setTimeout(function () {
-          const input = document.querySelector('input[type="string"]');
-          if (input) {
-            input.focus();
-          }
-        }, 3000);
+    if (storedText.includes("{") || storedText === "") {
+      storedText = ""; // Set storedText to "None" if it includes "{"
+    }
+
+    if (input) {
+      input.value = storedText;
+      const inputEvent = new Event("input", { bubbles: true });
+      input.dispatchEvent(inputEvent);
+      const close1 = Array.from(document.querySelectorAll("button")).find(
+        (el) => el.textContent.includes("Submit")
+      );
+      if (close1) {
+        close1.click();
       }
+      setTimeout(function () {
+        close1.click();
+      }, 1000);
+    }
+    answers = storedText;
+  } else {
+    answers = ""; // Set answers to "None" if storedText is not available
+  }
+  console.log("Shahan Answer : ---" + answers + "---");
+  setTimeout(function () {
+    const input = document.querySelector('input[type="string"]');
+    if (input) {
+      input.focus();
+    }
+  }, 1000);
+}
     }
     ///// Close Messages And Go Tasks/////
     setInterval(function () {
@@ -139,7 +139,7 @@ function done() {
       if (close1) {close1.click();}
       if (taskkk) {taskkk.click();}
       if (relod) {location.reload();}
-    }, 60000);
+    }, 2000);
 
 
     setInterval(function () {
@@ -212,7 +212,7 @@ function done() {
         claimm.click();
            setTimeout(function () {
                backbutton.click();
-          }, 5000);
+          }, 2000);
       }
     }, 1000);
   });
