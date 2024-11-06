@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Tapswap
 // @namespace    http://shahanpanel.link
-// @version      2.7
+// @version      2.10
 // @description  Tapswap Auto Task :)
 // @author       HamedAp & lcarusD
 // @match        https://app.tapswap.club/*
@@ -9,10 +9,9 @@
 // @grant        GM_webRequest
 // @downloadURL  https://raw.githubusercontent.com/LightEssence/Tapswap-Cinema/main/tampermonkey.js
 // @updateURL    https://raw.githubusercontent.com/LightEssence/Tapswap-Cinema/main/tampermonkey.js
-// @homepage     https://github.com/HamedAp/Tapswap-Cinema/
+// @homepage     https://github.com/LightEssence/Tapswap-Cinema/
 // @require      https://code.jquery.com/jquery-3.7.1.min.js
 // ==/UserScript==
-
 (function () {
   function onready(fn) {
     if (document.readyState != "loading") fn();
@@ -48,7 +47,7 @@ console.error = console.warn = console.info = console.debug = () => { };
     var buttonn = document.createElement("Button");
     buttonn.style.cssText =
       "BACKGROUND-COLOR: red;top: 0px; right: 0px; position: absolute; z-index: 99999; padding: 3px 2px;";
-    buttonn.id = "hamedap";
+    buttonn.id = "LightEssence";
     buttonn.innerHTML = tapname + " ( " + username + " )";
     document.body.appendChild(buttonn);
     var backbutton = document.createElement("Button");
@@ -86,48 +85,49 @@ function done() {
   if (storedText) {
     const bigObj = JSON.parse(storedText, (key, value, context) => {
       if (key == soal) {
-        storedText = value;
+        storedText = value || ""; // Set to "None" if value is empty
       }
       return storedText;
     });
-          const input = document.evaluate(
-            "/html/body/div/div[1]/div[2]/div[3]/div[2]/div/div[3]/div/div/input",
-            document,
-            null,
-            XPathResult.FIRST_ORDERED_NODE_TYPE,
-            null
-          ).singleNodeValue;
-     if(storedText.includes("{")){
-          storedText = "";
-      }
-          if (input) {
-            input.value = storedText;
-            const inputEvent = new Event("input", { bubbles: true });
-            input.dispatchEvent(inputEvent);
-            const close1 = Array.from(document.querySelectorAll("button")).find(
-              (el) => el.textContent.includes("Submit")
-            );
-            if (close1) {
-              close1.click();
-            }
-              setTimeout(function () {
-                  close1.click();
-              },3000);
-          }
-          answers = storedText;
 
+    const input = document.evaluate(
+      "/html/body/div/div[1]/div[2]/div[3]/div[2]/div/div[3]/div/div/input",
+      document,
+      null,
+      XPathResult.FIRST_ORDERED_NODE_TYPE,
+      null
+    ).singleNodeValue;
 
-        } else {
-          answers = "NotFound";
-        }
-        console.log("Shahan Answer : ---" + answers + "---");
-        setTimeout(function () {
-          const input = document.querySelector('input[type="string"]');
-          if (input) {
-            input.focus();
-          }
-        }, 3000);
+    if (storedText.includes("{") || storedText === "") {
+      storedText = ""; // Set storedText to "None" if it includes "{"
+    }
+
+    if (input) {
+      input.value = storedText;
+      const inputEvent = new Event("input", { bubbles: true });
+      input.dispatchEvent(inputEvent);
+      const close1 = Array.from(document.querySelectorAll("button")).find(
+        (el) => el.textContent.includes("Submit")
+      );
+      if (close1) {
+        close1.click();
       }
+      setTimeout(function () {
+        close1.click();
+      }, 1000);
+    }
+    answers = storedText;
+  } else {
+    answers = ""; // Set answers to "None" if storedText is not available
+  }
+  console.log("Shahan Answer : ---" + answers + "---");
+  setTimeout(function () {
+    const input = document.querySelector('input[type="string"]');
+    if (input) {
+      input.focus();
+    }
+  }, 1000);
+}
     }
     ///// Close Messages And Go Tasks/////
     setInterval(function () {
@@ -139,7 +139,7 @@ function done() {
       if (close1) {close1.click();}
       if (taskkk) {taskkk.click();}
       if (relod) {location.reload();}
-    }, 10000);
+    }, 2000);
 
 
     setInterval(function () {
@@ -151,6 +151,7 @@ function done() {
       const claimm = Array.from(document.querySelectorAll("button")).find((el) => el.textContent.includes("Claim"));
       const startmission = Array.from(document.querySelectorAll("button")).find((el) => el.textContent.includes("Start mission"));
       const perror = Array.from(document.querySelectorAll("p")).find((el) => el.textContent.includes("Looks like you"));
+      const wronganswer = Array.from(document.querySelectorAll("h5")).find((el) => el.textContent.includes("answer"));
       const tasklistcinema = Array.from(document.querySelectorAll("button")).find((el) => el.textContent.includes("Cinema"));
       const tasklistspecial = Array.from(document.querySelectorAll("button")).find((el) => el.textContent.includes("Special"));
       const tasklistleagues = Array.from(document.querySelectorAll("button")).find((el) => el.textContent.includes("Leagues"));
@@ -159,6 +160,11 @@ function done() {
         if (perror && submitt) {
         submitt.click();
             backbutton.click();
+        }
+       if (wronganswer && submitt) {
+         setTimeout(function () {
+            backbutton.click();
+            }, 5000);
         }
         if (perror && check) {
                check.click();
@@ -212,7 +218,7 @@ function done() {
         claimm.click();
            setTimeout(function () {
                backbutton.click();
-          }, 3000);
+          }, 2000);
       }
     }, 1000);
   });
